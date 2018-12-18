@@ -14,7 +14,7 @@ Bintray 是 jcenter 的托管商，因此你必须注册一个 Bintray 账号，
 ### 2.创建Android library
 ![api_key](showImg/androidLib.png)
 
-### 2. 配置插件
+### 3. 配置插件
 ![api_key](showImg/maven.png)
 首先升级 Android 插件到最新版，然后添加 maven 插件 bintray 插件，完成后如下：
 
@@ -42,7 +42,7 @@ allprojects {
 >* android-maven-gradle-plugin 插件是用来打包 Maven 所需文件的
 >* gradle-bintray-plugin 插件是用来将生成的 Maven 所需文件上传到 Bintray 的
 
-### 3. 配置项目信息
+### 4. 配置项目信息
 ![api_key](showImg/gradlePro.png)
 下载 [gradle.properties](./LibToJcenter/gradle.properties) 文件并放到你的 library module 目录下
 
@@ -87,7 +87,7 @@ javadoc.name=bannermul
 
 你无需配置项目版本，会自动从你的 build.gradle 中获取版本名称作为项目版本
 
-### 4. 配置Bintray账号以及开发者信息
+### 5. 配置Bintray账号以及开发者信息
 ![api_key](showImg/localPro.png)
 
 下载 [local.properties](./LibToJcenter/local.properties) 文件并放到你的 library module 目录下
@@ -127,7 +127,7 @@ developer.email=584450903@qq.com
 
 注意要将 local.proerties 文件加入忽略列表，以免被提交到 Github 或其他网站泄露个人信息
 
-### 5. 配置 bintrayUpload.gradle
+### 6. 配置 bintrayUpload.gradle
 
 #### 方法1：直接使用远程 bintrayUpload.gradle 文件
 
@@ -217,7 +217,7 @@ apply from: "bintrayUpload.gradle"
 
 推荐大家使用第一种方案，简单快捷，至此配置工作已全部结束
 
-### 6. 执行命令打包并上传到 Bintray
+### 7. 执行命令打包并上传到 Bintray
 
 打开终端进入项目目录下，执行 'gradlew install',然后再执行 `gradlew clean build bintrayUpload` 命令即可
 
@@ -225,7 +225,7 @@ apply from: "bintrayUpload.gradle"
 
 另外，如果你的本地已经配置了 Gradle 了，那么执行 `gradle bintrayUpload` 命令也可以。 gradlew 是 Gradle 的一层封装，如果你本地没有安装 Gradle gradlew 就会自动下载 Gradle
 
-### 7. [请求提交你的项目到 jcenter](https://blog.csdn.net/yufumatou/article/details/80376788?tdsourcetag=s_pcqq_aiomsg)
+### 8. [请求提交你的项目到 jcenter](https://blog.csdn.net/yufumatou/article/details/80376788?tdsourcetag=s_pcqq_aiomsg)
 ![api_key](showImg/addTJcenter.png)
 
 前面所有步骤走完之后实际上只是上传了你的项目到 Bintray 而已，并没有被包含在 jcenter 中，要想提交到 jcenter 中还需要 Bintray 的审核。
@@ -236,7 +236,7 @@ apply from: "bintrayUpload.gradle"
 
 一般情况下审核需要 4 到 5 个小时，耐心等待就行了，审核通过后会给你发邮件通知你，并且以后更新项目就不需要再审核了。
 
-### 8. 一句话导入你的项目
+### 9. 一句话导入你的项目
 
 当审核通过后，别人就可以一句话导入你的项目了，例如：
 
@@ -244,7 +244,7 @@ apply from: "bintrayUpload.gradle"
 compile 'com.zy:bannermul:1.0.0'
 ```
 
-### 9. 额外补充：
+### 10. 额外补充：
 
 保持你的 library module 的名字同 artifactId 一样
 因为在 Bintray 上你的项目的 maven-metadata.xml 文件的路径是 `gruopId+"/"+module名称`
@@ -257,13 +257,13 @@ compile 'com.zy:bannermul:1.0.0'
 
 目前为止我还没有找到更好的解决办法，就只能让 module 名称和 artifactId 保持一致，如果你们谁有更好的办法，欢迎留言交流
 
-### 10. 参考文章
+### 11. 参考文章
 >* [Android使用Gradlew发布aar项目到JCenter仓库](https://github.com/panpf/android-library-publish-to-jcenter)
 >* [Android拓展系列(12)--使用Gradle发布aar项目到JCenter仓库](http://www.cnblogs.com/qianxudetianxia/p/4322331.html)
 >* [使用Gradle发布Android开源项目到JCenter](http://blog.csdn.net/maosidiaoxian/article/details/43148643)
 >* [Android 项目打包到 JCenter 的坑](http://www.jianshu.com/p/c721f9297b2f?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
 
-### 11. 常见问题
+### 12. 常见问题
 >* `Error:Cause: org/gradle/api/publication/maven/internal/DefaultMavenFactory`：当你使用的 Gradle 版本是 2.4 以上，Android 插件版本是 1.3.0 以上的时候就会出现这个问题，这时候你只需将 android-maven-gradle-plugin 插件版本改为 **classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'** 即可
 >* `You are using JDK version ‘java version “1.7.0_71”’. Some versions of JDK 1.7 (e.g. 1.7.0_10) may cause class loading errors in Gradle.Please update to a newer version (e.g. 1.7.0_67)`：当你使用的 Gradle 版本是 2.4 以上，Andriod 插件版本是 1.2.3 的时候就会出现这个问题，同样的你只需要将 android-maven-gradle-plugin 插件版本改为 **classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'** 即可
 >* `No value has been specified for property 'packageName'.` 出这个问题肯定是看文档不仔细，把 project.properties 文件放在了项目根目录下，一定要放在 mudule 目录下才可以
