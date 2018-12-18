@@ -273,4 +273,8 @@ compile 'com.zy:bannermul:1.0.0'
  captainbupt](https://github.com/captainbupt)发现的这个问题）
  >* `build/libs/***-javadoc.jar could not be found. build/libs/***-sources.jar could not be found. poms/pom-default.xml (No such file or directory) ` 出现这个错误说明你执行 bintrayUpload 的方式是在 Android Studio 的 Gradle 窗口中选择 "Run *** bintrayUpload"，文档中写的很清楚要在命令行中执行 gradlew bintrayUpload
 
+### 欢迎交流
+欢迎提问交流；若有bug，请添加bug截图或代码片段，以便更快更好的解决问题。<br>
+欢迎大家一起交流
+
 ### [我的博客](http://blog.sina.com.cn/s/articlelist_6078695441_0_1.html)
