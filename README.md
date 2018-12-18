@@ -8,15 +8,18 @@ Bintray 是 jcenter 的托管商，因此你必须注册一个 Bintray 账号，
 
 登陆后在首页右上角点击用户名进入个人主页，然后点击用户名下面的 Edit 进入个人信息编辑页面，接下来点击页面左边列表的最后一项 API Key
 
-![api_key](showImg/bintray.png)
+<!--![api_key](showImg/bintray.png)-->
+<img src='./showImg/bintray.png' width='400' height='auto'>
 
 如图所示点击最右边箭头指示的复制按钮即可复制你的 API Key
 
 ### 2.创建Android library
-![api_key](showImg/androidLib.png)
+<!--![api_key](showImg/androidLib.png)-->
+<img src='./showImg/androidLib.png' width='400' height='auto'>
 
 ### 3. 配置插件
-![api_key](showImg/maven.png)
+<!--![api_key](showImg/maven.png)-->
+<img src='./showImg/maven.png' width='400' height='auto'>
 首先升级 Android 插件到最新版，然后添加 maven 插件 bintray 插件，完成后如下：
 
 ```groovy
@@ -44,7 +47,8 @@ allprojects {
 >* gradle-bintray-plugin 插件是用来将生成的 Maven 所需文件上传到 Bintray 的
 
 ### 4. 配置项目信息
-![api_key](showImg/gradlePro.png)
+<!--![api_key](showImg/gradlePro.png)-->
+<img src='./showImg/gradlePro.png' width='400' height='auto'>
 下载 [gradle.properties](./LibToJcenter/gradle.properties) 文件并放到你的 library module 目录下
 
 project.properties 文件的原始内容如下：
@@ -89,7 +93,8 @@ javadoc.name=bannermul
 你无需配置项目版本，会自动从你的 build.gradle 中获取版本名称作为项目版本
 
 ### 5. 配置Bintray账号以及开发者信息
-![api_key](showImg/localPro.png)
+<!--![api_key](showImg/localPro.png)-->
+<img src='./showImg/localPro.png' width='400' height='auto'>
 
 下载 [local.properties](./LibToJcenter/local.properties) 文件并放到你的 library module 目录下
 
@@ -173,7 +178,8 @@ apply from: "https://github.com/gegeyang0124/android-library-publish-to-jcenter/
 ```
 
 #### 方法2：下载后使用本地 bintrayUpload.gradle 文件
-![api_key](showImg/bintrayUpload.png)
+<!--![api_key](showImg/bintrayUpload.png)-->
+<img src='./showImg/bintrayUpload.png' width='400' height='auto'>
 
 首先下载 [bintrayUpload.gradle](./LibToJcenter/testlib/bintrayUpload.gradle) 文件并放到你的 library module 目录下
 
@@ -227,7 +233,8 @@ apply from: "bintrayUpload.gradle"
 另外，如果你的本地已经配置了 Gradle 了，那么执行 `gradle bintrayUpload` 命令也可以。 gradlew 是 Gradle 的一层封装，如果你本地没有安装 Gradle gradlew 就会自动下载 Gradle
 
 ### 8. [请求提交你的项目到 jcenter](https://blog.csdn.net/yufumatou/article/details/80376788?tdsourcetag=s_pcqq_aiomsg)
-![api_key](showImg/addTJcenter.png)
+<!--![api_key](showImg/addTJcenter.png)-->
+<img src='./showImg/addTJcenter.png' width='400' height='auto'>
 
 前面所有步骤走完之后实际上只是上传了你的项目到 Bintray 而已，并没有被包含在 jcenter 中，要想提交到 jcenter 中还需要 Bintray 的审核。
 
