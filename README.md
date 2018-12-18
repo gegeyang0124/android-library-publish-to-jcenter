@@ -11,6 +11,9 @@ Bintray 是 jcenter 的托管商，因此你必须注册一个 Bintray 账号，
 
 如图所示点击最右边箭头指示的复制按钮即可复制你的 API Key
 
+### 2.创建Android library
+![api_key](showImg/androidLib.png)
+
 ### 2. 配置插件
 ![api_key](showImg/maven.png)
 首先升级 Android 插件到最新版，然后添加 maven 插件 bintray 插件，完成后如下：
@@ -40,8 +43,8 @@ allprojects {
 >* gradle-bintray-plugin 插件是用来将生成的 Maven 所需文件上传到 Bintray 的
 
 ### 3. 配置项目信息
-
-下载 [project.properties](https://github.com/panpf/android-library-publish-to-jcenter/raw/master/project.properties) 文件并放到你的 library module 目录下
+![api_key](showImg/gradlePro.png)
+下载 [gradle.properties](./LibToJcenter/gradle.properties) 文件并放到你的 library module 目录下
 
 project.properties 文件的原始内容如下：
 
@@ -71,22 +74,23 @@ javadoc.name=
 
 ```properties
 #project
-project.name=Sketch
-project.groupId=me.xiaopan
-project.artifactId=sketch
+project.name=bannermul
+project.groupId=com.zy
+project.artifactId=bannermul
 project.packaging=aar
-project.siteUrl=https://github.com/xiaopansky/Sketch
-project.gitUrl=https://github.com/xiaopansky/Sketch.git
+project.siteUrl=https://github.com/gegeyang0124/BannerMul
+project.gitUrl=https://github.com/gegeyang0124/BannerMul.git
 
 #javadoc
-javadoc.name=Sketch
+javadoc.name=bannermul
 ```
 
 你无需配置项目版本，会自动从你的 build.gradle 中获取版本名称作为项目版本
 
 ### 4. 配置Bintray账号以及开发者信息
+![api_key](showImg/localPro.png)
 
-下载 [local.properties](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/local.properties) 文件并放到你的 library module 目录下
+下载 [local.properties](./LibToJcenter/local.properties) 文件并放到你的 library module 目录下
 
 local.properties 文件的原始内容如下：
 ```properties
@@ -112,12 +116,11 @@ developer.email=
 ```properties
 #bintray
 bintray.user=xiaopansky
-bintray.apikey=*****************************
+#bintray.apikey=你的bintray的key
 
-#developer
-developer.id=xiaopan
-developer.name=********
-developer.email=sky@xiaopan.me
+developer.id=gegeyang0124
+developer.name=zhouyang
+developer.email=584450903@qq.com
 ```
 
 *号显示的为个人信息不反方便透露，还请见谅
@@ -134,14 +137,16 @@ developer.email=sky@xiaopan.me
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.0"
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 22
-        versionCode 100
-        versionName "1.0.0"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -150,14 +155,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
-apply from: "https://raw.githubusercontent.com/panpf/android-library-publish-to-jcenter/master/bintrayUpload.gradle"
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+
+apply from: "https://github.com/gegeyang0124/android-library-publish-to-jcenter/blob/master/LibToJcenter/testlib/bintrayUpload.gradle"
 ```
 
 #### 方法2：下载后使用本地 bintrayUpload.gradle 文件
+![api_key](showImg/bintrayUpload.png)
 
-首先下载 [bintrayUpload.gradle](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/bintrayUpload.gradle) 文件并放到你的 library module 目录下
+首先下载 [bintrayUpload.gradle](./LibToJcenter/testlib/bintrayUpload.gradle) 文件并放到你的 library module 目录下
 
 然后修改你的 library module 的 build.gradle 文件，在最后加上 `apply from: "bintrayUpload.gradle"` ，如下所示：
 
@@ -165,14 +182,16 @@ apply from: "https://raw.githubusercontent.com/panpf/android-library-publish-to-
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.0"
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 22
-        versionCode 100
-        versionName "1.0.0"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -181,6 +200,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 apply from: "bintrayUpload.gradle"
@@ -190,13 +219,14 @@ apply from: "bintrayUpload.gradle"
 
 ### 6. 执行命令打包并上传到 Bintray
 
-打开终端进入项目目录下，执行 `gradlew bintrayUpload` 命令即可
+打开终端进入项目目录下，执行 'gradlew install',然后再执行 `gradlew clean build bintrayUpload` 命令即可
 
 `千万不要在 Android Studio 的 Gradle 窗口中选择 "Run *** bintrayUpload" 执行，这样你会得到 build/libs/***-javadoc.jar could not be found. build/libs/***-sources.jar could not be found. poms/pom-default.xml (No such file or directory) 错误`
 
 另外，如果你的本地已经配置了 Gradle 了，那么执行 `gradle bintrayUpload` 命令也可以。 gradlew 是 Gradle 的一层封装，如果你本地没有安装 Gradle gradlew 就会自动下载 Gradle
 
-### 7. 请求提交你的项目到 jcenter
+### 7. [请求提交你的项目到 jcenter](https://blog.csdn.net/yufumatou/article/details/80376788?tdsourcetag=s_pcqq_aiomsg)
+![api_key](showImg/addTJcenter.png)
 
 前面所有步骤走完之后实际上只是上传了你的项目到 Bintray 而已，并没有被包含在 jcenter 中，要想提交到 jcenter 中还需要 Bintray 的审核。
 
@@ -211,7 +241,7 @@ apply from: "bintrayUpload.gradle"
 当审核通过后，别人就可以一句话导入你的项目了，例如：
 
 ```groovy
-compile 'me.xiaopan:sketch:2.0.0'
+compile 'com.zy:bannermul:1.0.0'
 ```
 
 ### 9. 额外补充：
@@ -228,9 +258,9 @@ compile 'me.xiaopan:sketch:2.0.0'
 目前为止我还没有找到更好的解决办法，就只能让 module 名称和 artifactId 保持一致，如果你们谁有更好的办法，欢迎留言交流
 
 ### 10. 参考文章
+>* [Android使用Gradlew发布aar项目到JCenter仓库](https://github.com/panpf/android-library-publish-to-jcenter)
 >* [Android拓展系列(12)--使用Gradle发布aar项目到JCenter仓库](http://www.cnblogs.com/qianxudetianxia/p/4322331.html)
 >* [使用Gradle发布Android开源项目到JCenter](http://blog.csdn.net/maosidiaoxian/article/details/43148643)
->* [使用Gradle发布项目到JCenter仓库](http://zhengxiaopeng.com/2015/02/02/使用Gradle发布项目到JCenter仓库/)
 >* [Android 项目打包到 JCenter 的坑](http://www.jianshu.com/p/c721f9297b2f?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
 
 ### 11. 常见问题
