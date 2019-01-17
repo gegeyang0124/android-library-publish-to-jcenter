@@ -225,7 +225,8 @@ apply from: "bintrayUpload.gradle"
 推荐大家使用第一种方案，简单快捷，至此配置工作已全部结束
 
 ### 7. 执行命令打包并上传到 Bintray
-
+打开终端（如图） <br/>
+<img src='./showImg/cmd.png' width='400' height='auto'>
 打开终端进入项目目录下，执行 'gradlew install',然后再执行 `gradlew clean build bintrayUpload` 命令即可
 
 `千万不要在 Android Studio 的 Gradle 窗口中选择 "Run *** bintrayUpload" 执行，这样你会得到 build/libs/***-javadoc.jar could not be found. build/libs/***-sources.jar could not be found. poms/pom-default.xml (No such file or directory) 错误`
