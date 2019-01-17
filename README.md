@@ -121,7 +121,7 @@ developer.email=
 
 ```properties
 #bintray
-bintray.user=xiaopansky
+bintray.user=yehun
 #bintray.apikey=你的bintray的key
 
 developer.id=gegeyang0124
